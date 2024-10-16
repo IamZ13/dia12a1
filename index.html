@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cơ Cấu Dân Số Việt Nam</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 20px;
+            background-color: #f9f9f9;
+            display: flex;
+            justify-content: center; /* Căn giữa theo chiều ngang */
+        }
+        .container {
+            max-width: 800px; /* Giới hạn chiều rộng */
+            width: 100%; /* Chiều rộng 100% cho các màn hình nhỏ */
+        }
+        h1, h2, h3, h4 {
+            color: #333;
+            text-align: center; /* Căn giữa tiêu đề */
+        }
+        ul {
+            margin-left: 20px;
+        }
+        .section {
+            margin-bottom: 30px;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        img {
+            display: block; /* Chuyển ảnh thành block để margin hoạt động */
+            margin: 0 auto; /* Căn giữa ảnh */
+            max-width: 100%; /* Đảm bảo ảnh không vượt quá chiều rộng của container */
+            height: auto; /* Đảm bảo tỉ lệ ảnh không bị biến dạng */
+        }
+    </style>
+    
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Cơ Cấu Dân Số Việt Nam</h1>
+
+        <div class="section">
+            <h2>1. Cơ Cấu Theo Độ Tuổi</h2>
+            <ul>
+                <li><strong>Dân số trẻ:</strong> Khoảng 20% dân số dưới 15 tuổi, tạo ra nhu cầu cao về giáo dục và dịch vụ chăm sóc sức khỏe.</li>
+                <li><strong>Dân số trong độ tuổi lao động:</strong> Khoảng 60% dân số trong độ tuổi lao động (15-64 tuổi), nhưng áp lực việc làm gia tăng do tỷ lệ thất nghiệp ở một số khu vực.</li>
+                <li><strong>Dân số già:</strong> Tỷ lệ người trên 65 tuổi đang tăng, dự kiến sẽ đạt khoảng 14% vào năm 2040, điều này đặt ra thách thức cho hệ thống an sinh xã hội và chăm sóc sức khỏe.</li>
+            </ul>
+        </div>
+        
+        <div class="section">
+            <h2>Biểu Đồ Dân Số Theo Độ Tuổi</h2>
+            <canvas id="ageDistributionChart" width="600" height="400"></canvas>
+            <script>
+                const ctx = document.getElementById('ageDistributionChart').getContext('2d');
+                const ageDistributionChart = new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: ['Dân số trẻ (dưới 15 tuổi)', 'Dân số trong độ tuổi lao động (15-64 tuổi)', 'Dân số già (trên 65 tuổi)'],
+                        datasets: [{
+                            label: 'Tỷ lệ (%)',
+                            data: [20, 60, 14],
+                            backgroundColor: [
+                                'rgba(75, 192, 192, 0.6)',
+                                'rgba(153, 102, 255, 0.6)',
+                                'rgba(255, 99, 132, 0.6)'
+                            ],
+                            borderColor: [
+                                'rgba(75, 192, 192, 1)',
+                                'rgba(153, 102, 255, 1)',
+                                'rgba(255, 99, 132, 1)'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: {
+                                display: true
+                            },
+                            datalabels: {
+                                formatter: (value, context) => {
+                                    const total = context.chart._data.datasets[0].data.reduce((acc, val) => acc + val, 0);
+                                    const percentage = ((value / total) * 100).toFixed(1) + '%';
+                                    return percentage;
+                                },
+                                color: '#fff',
+                            }
+                        }
+                    }
+                });
+            </script>
+        </div>
+        
+        <div class="section">
+            <h2>2. Cơ Cấu Theo Giới Tính</h2>
+            <ul>
+                <li>Tỷ lệ giới tính khi sinh thường không cân bằng, với khoảng 111-113 bé trai trên 100 bé gái, do định kiến về việc sinh con trai.</li>
+                <li>Tỷ lệ giới tính tổng thể tương đối cân bằng, nhưng ở các độ tuổi cao hơn, tỷ lệ nữ thường cao hơn nam do tuổi thọ nữ cao hơn.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>3. Cơ Cấu Theo Dân Tộc</h2>
+            <ul>
+                <li>Việt Nam có 54 dân tộc, trong đó dân tộc Kinh chiếm khoảng 86%.</li>
+                <li>Các dân tộc thiểu số thường tập trung ở các vùng núi và gặp khó khăn về phát triển kinh tế.</li>
+                <li>Sự chênh lệch về điều kiện sống, giáo dục và y tế giữa các dân tộc lớn và dân tộc thiểu số vẫn là một thách thức lớn.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Thách Thức</h2>
+            <h3>1. Vấn Đề Dân Số Trẻ</h3>
+            <ul>
+                <li><strong>Áp lực về giáo dục:</strong> Tăng số lượng trẻ em trong độ tuổi học đường dẫn đến áp lực lên hệ thống giáo dục.</li>
+                <li><strong>Chăm sóc sức khỏe:</strong> Cần cải thiện dịch vụ y tế và dinh dưỡng cho trẻ em, đặc biệt ở vùng nông thôn và dân tộc thiểu số.</li>
+            </ul>
+            <img src="https://ctsv.ntt.edu.vn/wp-content/uploads/2022/04/ap-luc-hoc-tap-6.jpg" width="550" height="300">
+            
+            <h3>2. Vấn Đề Dân Số Trong Độ Tuổi Lao Động</h3>
+            <ul>
+                <li><strong>Tỷ lệ thất nghiệp:</strong> Tình trạng thất nghiệp và thiếu việc làm cho lao động trẻ, đặc biệt sau đại dịch COVID-19.</li>
+                <li><strong>Kỹ năng nghề:</strong> Nhu cầu cải thiện kỹ năng và năng lực cạnh tranh của lao động trẻ so với thị trường lao động ngày càng khắt khe.</li>
+            </ul>
+            <img src="https://danviet.mediacdn.vn/296231569849192448/2023/6/19/viec-lam-ky-son-1687188857570435369905.jpg" width="550" height="300">
+            
+            <h3>3. Vấn Đề Dân Số Già</h3>
+            <ul>
+                <li><strong>Gia tăng người cao tuổi:</strong> Tỷ lệ người cao tuổi đang gia tăng, dẫn đến nhu cầu chăm sóc sức khỏe và an sinh xã hội ngày càng lớn.</li>
+                <li><strong>Chăm sóc sức khỏe:</strong> Thiếu dịch vụ chăm sóc sức khỏe và hỗ trợ cho người cao tuổi, đặc biệt ở vùng nông thôn.</li>
+            </ul>
+            <img src="https://duonglaobinhmy.com/wp-content/uploads/2024/05/an-sinh-xa-hoi-cho-nguoi-cao-tuoi.jpeg" width="550" height="300">
+            
+            <h3>4. Vấn Đề Mất Cân Bằng Giới Tính</h3>
+            <ul>
+                <li><strong>Tỷ lệ giới tính khi sinh:</strong> Tình trạng mất cân bằng giới tính khi sinh, với khoảng 111-113 bé trai trên 100 bé gái.</li>
+                <li><strong>Định kiến xã hội:</strong> Các quan niệm truyền thống về giá trị của con trai dẫn đến áp lực xã hội đối với việc sinh con trai.</li>
+            </ul>
+            <img src="https://lh3.googleusercontent.com/proxy/E4GObgjYCM_cQpnrdSyrsoOf8RyCUdga2WmJxCawUzjIUWtGJrjGoOUlvrs9qRq0fFrFYk_u8Guyull4uusf4XwfFxO-JlXmtlRLwfwx-AMOvxQMdV8" width="550" height="300">
+            
+            <h3>5. Vấn Đề Phân Bố Dân Cư</h3>
+            <ul>
+                <li><strong>Tập trung đô thị hóa:</strong> Dân số tập trung ở các đô thị lớn, gây ra tình trạng quá tải hạ tầng, giao thông và ô nhiễm.</li>
+                <li><strong>Di cư:</strong> Di cư từ nông thôn ra thành phố gia tăng, tạo ra các thách thức về nhà ở, việc làm và dịch vụ công.</li>
+            </ul>
+            <img src="https://img.loigiaihay.com/picture/2018/0503/hinh-23-dia-9-ddn_3.jpg" width="550" height="800">
+            
+            <h3>6. Vấn Đề Chênh Lệch Giữa Các Dân Tộc</h3>
+            <ul>
+                <li><strong>Khó khăn phát triển:</strong> Các dân tộc thiểu số thường gặp khó khăn trong việc tiếp cận giáo dục, y tế và phát triển kinh tế.</li>
+                <li><strong>Chênh lệch về điều kiện sống:</strong> Sự khác biệt lớn về điều kiện sống và thu nhập giữa dân tộc Kinh và các dân tộc thiểu số.</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Cách Chính Phủ Giải Quyết</h2>
+            <h3>1. Vấn Đề Dân Số Trẻ</h3>
+            <ul>
+                <li><strong>Tăng cường đầu tư cho giáo dục:</strong> Mở rộng cơ sở vật chất trường học, đào tạo giáo viên và cải thiện chất lượng giáo dục.</li>
+            </ul>
+            <img src="https://lh6.googleusercontent.com/proxy/Q1pP2qJUTmexLVBefN-tDDzIi8kDZciysVj5VxE3PVkT8coKkT0Djw_bbScxnZaD1B-gRu6XSGBlmd9C7zMqze7oF7yMDrdHi_DhNaeWEBBc9tYdMk00pT7KDaDoGYp8A8xRxv5ksgnegqygkKApLggkvvTlF6b8_t5Bl9mHGC9t0Q" width="550" height="300">
+            
+            <h3>2. Vấn Đề Dân Số Trong Độ Tuổi Lao Động</h3>
+            <ul>
+                <li><strong>Đào tạo nghề và phát triển kỹ năng:</strong> Tăng cường các chương trình đào tạo nghề và học nghề cho thanh niên để đáp ứng nhu cầu thị trường.</li>
+                <li><strong>Hỗ trợ tạo việc làm:</strong> Khuyến khích đầu tư vào các ngành công nghiệp và dịch vụ để tạo thêm việc làm cho lao động trẻ.</li>
+            </ul>
+
+            <h3>3. Vấn Đề Dân Số Già</h3>
+            <ul>
+                <li><strong>Chăm sóc sức khỏe người cao tuổi:</strong> Phát triển hệ thống dịch vụ chăm sóc sức khỏe và tư vấn cho người cao tuổi, bao gồm khám sức khỏe định kỳ.</li>
+                <li><strong>Chế độ an sinh xã hội:</strong> Cải thiện chính sách hưu trí và các hỗ trợ xã hội cho người cao tuổi.</li>
+            </ul>
+
+            <h3>4. Vấn Đề Mất Cân Bằng Giới Tính</h3>
+            <ul>
+                <li><strong>Tuyên truyền về bình đẳng giới:</strong> Triển khai các chương trình truyền thông nhằm nâng cao nhận thức về giá trị của trẻ em gái.</li>
+                <li><strong>Chính sách pháp lý:</strong> Thực thi các quy định nhằm ngăn chặn tình trạng lựa chọn giới tính khi sinh.</li>
+            </ul>
+
+            <h3>5. Vấn Đề Phân Bố Dân Cư</h3>
+            <ul>
+                <li><strong>Đầu tư hạ tầng nông thôn:</strong> Phát triển cơ sở hạ tầng giao thông, điện, nước ở các vùng nông thôn để cải thiện điều kiện sống.</li>
+                <li><strong>Chương trình phát triển đô thị:</strong> Tạo điều kiện cho việc phát triển đô thị bền vững, giảm tải cho các thành phố lớn.</li>
+            </ul>
+
+            <h3>6. Vấn Đề Chênh Lệch Giữa Các Dân Tộc</h3>
+            <ul>
+                <li><strong>Chính sách phát triển vùng:</strong> Thực hiện các chính sách đặc thù nhằm phát triển kinh tế, giáo dục và y tế cho các dân tộc thiểu số.</li>
+                <li><strong>Bảo tồn văn hóa:</strong> Hỗ trợ bảo tồn và phát triển các giá trị văn hóa của các dân tộc thiểu số, tạo cơ hội phát triển bình đẳng.</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
